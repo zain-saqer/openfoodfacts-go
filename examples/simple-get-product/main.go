@@ -5,21 +5,25 @@
 // from a barcode.
 //
 // To build this code, simply:
-//   go get
-//   go build
+//
+//	go get
+//	go build
 //
 // To specify the barcode to use, run the program with the "-code" flag, eg:
-//   ./simple-get-product -code "0737628064502"
+//
+//	./simple-get-product -code "0737628064502"
 //
 // For more detail:
-//   ./simple-get-product -help
+//
+//	./simple-get-product -help
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 
-	"github.com/openfoodfacts/openfoodfacts-go"
+	"github.com/zain-saqer/openfoodfacts-go"
 )
 
 var (
@@ -33,7 +37,7 @@ func init() {
 
 func main() {
 	api := openfoodfacts.NewClient("world", "", "")
-	product, err := api.Product(code)
+	product, err := api.Product(context.TODO(), code)
 	if err == nil {
 		fmt.Printf("%+v\n", product)
 	} else {
